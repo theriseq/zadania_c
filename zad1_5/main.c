@@ -1,4 +1,11 @@
+/*
+Patryk Orlowski
+19.12.2020
+
+Dla n-elementowego ciagu liczb rzeczywistych obliczyc wartosc srednia i odchylenie standardowe
+*/
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 double oblicz_srednia(int liczby[], int rozm) {
@@ -11,19 +18,16 @@ double oblicz_srednia(int liczby[], int rozm) {
     return srednia = suma / rozm;
 }
 
-double oblicz_wariacje(int liczby[], int rozm, double srednia) {
+double oblicz_odchylenie(int liczby[], int rozm, double srednia) {
 
-    double wariacja = 0;
+    double odchylenie = 0;
 
     for (int i = 0; i < rozm; i++) {
-        wariacja += pow((liczby[i] - srednia), 2.0);
+        odchylenie += pow((liczby[i] - srednia), 2.0);
     }
 
-    return wariacja / rozm;
+    return sqrt(odchylenie / rozm);
 
-}
-double oblicz_odchylenie(double wariacja) {
-    return sqrt(wariacja);
 }
 
 double zaokraglij(double wartosc) {
@@ -32,16 +36,14 @@ double zaokraglij(double wartosc) {
 
 int main() {
 
-    int liczby[] = {2,5,1,3};
+    int liczby[] = {6,3,5,5,6};
     int rozm = (sizeof(liczby) / sizeof(liczby[0]));
 
     double srednia = oblicz_srednia(liczby, rozm);
-    double wariacja = oblicz_wariacje(liczby, rozm, srednia);
-    double odchylenie = oblicz_odchylenie(wariacja);
+    double odchylenie = oblicz_odchylenie(liczby, rozm, srednia);
 
-    printf("Wartosc srednia: ~%.2f\n", zaokraglij(srednia));
-    printf("wariacja ~%.2f\n", zaokraglij(wariacja));
-    printf("Odchylenie standardowe: ~%.2f", zaokraglij(odchylenie));
+    printf("Wartosc srednia = %.2f\n", zaokraglij(srednia));
+    printf("Odchylenie standardowe = %f = ~%.2f", odchylenie, zaokraglij(odchylenie));
 
 
     return 0;
