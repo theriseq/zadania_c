@@ -20,13 +20,18 @@ int ile = 0; //zmienna przechowuje ilosc poprawnie wpisanych danych
 
 bool czy_wprowadzone_dane_ok (char *data) {
     char miesiac[50];
+    char dzien[50];
     memset(miesiac, 0, sizeof(miesiac));
     if (strlen(data) == 10 && data_urodzenia[4] == '-' && data_urodzenia[7] == '-') {
         strncat(miesiac, &data[5], 1);
         strncat(miesiac, &data[6], 1);
-        //printf("mieisac %s", miesiac);
-        // zrob dzien
-        return true;
+        strncat(dzien, &data[8], 1);
+        strncat(dzien, &data[9], 1);
+       if (atoi(miesiac) < 13 && atoi(dzien) < 32) {
+           return true;
+       } else {
+           return false;
+       }
     } else {
         return false;
     }
