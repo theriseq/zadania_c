@@ -80,7 +80,7 @@ void pobierz_dane() {
                 memset(data, 0, sizeof(data));
                 ile++;
             } else {
-                printf("Ta postac jeszcze sie nie narodzila!\nNie dodaje\n");
+                printf("Ta postac jeszcze sie nie narodzila! Nie dodaje\n");
             }
         }
     }
