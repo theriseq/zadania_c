@@ -36,6 +36,14 @@ bool czy_wprowadzone_dane_ok (char *data) {
         return false;
     }
 }
+bool sprawdz_czy_urodzony (int data_u) {
+    int akt_data = 20210106;
+    if (data_u > akt_data) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
 void pobierz_dane() {
     char data[MAX_L];
@@ -55,36 +63,36 @@ void pobierz_dane() {
         gets(imie);
         printf("\nPodaj date: ");
         gets(data_urodzenia);
-        //strlen(data_urodzenia) < 10 ||
-        //        data_urodzenia[4] != '-' ||
-        //        data_urodzenia[7] != '-' ||
-        //        data_urodzenia[6] - '0' > 2 ||
-        //        (data_urodzenia[8] - '0' >= 3  && data_urodzenia[9] >= 2)
         if (czy_wprowadzone_dane_ok(data_urodzenia) == false) {
             printf("\nNie podano prawidlowej daty. Nie dodaje postaci do struktury.\n");
             if ( data_urodzenia[6] - '0' > 2) {
                 printf("Bledny miesiac\n");
             }
             if (data_urodzenia[8] - '0' >= 3  && data_urodzenia[9] >= 2) {
-                printf("bledny dzien\n");
+                printf("Bledny dzien\n");
             }
         } else {
-            printf("Dodaje %s %s %s..\n", nazwisko, imie, data_urodzenia);
-            //przypisz dane do struktury
-            strcpy(wszyscy[ile].nazwisko, nazwisko);
-            strcpy(wszyscy[ile].imie, imie);
-            strcpy(wszyscy[ile].data_urodzenia, data_urodzenia);
+            printf("wprowadzone ok\n");
 
-            ptr = strtok(wszyscy[ile].data_urodzenia, sep);
+            ptr = strtok(data_urodzenia, sep);
             memset(data, 0, sizeof(data));
             while (ptr != NULL) {
                 strcat(data, ptr);
                 ptr = strtok(NULL, sep);
             }
-            wszyscy[ile].data_uro_int = atoi(data);
-            memset(data, 0, sizeof(data));
-
-            ile++;
+            printf("data %s", data);
+            printf("dat at %i\n", atoi(data));
+            if (sprawdz_czy_urodzony(atoi(data)) == true) {
+                printf("Dodaje %s %s %s..\n", nazwisko, imie, data_urodzenia);
+                strcpy(wszyscy[ile].nazwisko, nazwisko);
+                strcpy(wszyscy[ile].imie, imie);
+                strcpy(wszyscy[ile].data_urodzenia, data_urodzenia);
+                wszyscy[ile].data_uro_int = atoi(data);
+                memset(data, 0, sizeof(data));
+                ile++;
+            } else {
+                printf("Ta postac jeszcze sie nie narodzila!\nNie dodaje\n");
+            }
         }
     }
 }
