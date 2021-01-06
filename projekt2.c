@@ -27,11 +27,11 @@ bool czy_wprowadzone_dane_ok (char *data) {
         strncat(miesiac, &data[6], 1);
         strncat(dzien, &data[8], 1);
         strncat(dzien, &data[9], 1);
-       if (atoi(miesiac) < 13 && atoi(dzien) < 32) {
-           return true;
-       } else {
-           return false;
-       }
+        if (atoi(miesiac) < 13 && atoi(dzien) < 32) {
+            return true;
+        } else {
+            return false;
+        }
     } else {
         return false;
     }
@@ -80,7 +80,7 @@ void pobierz_dane() {
                 memset(data, 0, sizeof(data));
                 ile++;
             } else {
-                printf("Ta postac jeszcze sie nie narodzila! Nie dodaje\n");
+                printf("Data urodzenia nie moze byc wieksza niz aktualna data!\n");
             }
         }
     }
@@ -101,7 +101,7 @@ void wypisz_dane() {
     if (ile > 0) {
         printf("\n---- POSORTOWANE DANE ----\n");
         for (int i = 0; i < ile; i++) {
-            printf("%i. %s %s\n", i+1, wszyscy[i].nazwisko, wszyscy[i].imie);
+            printf("%i. %s %s %s\n", i+1, wszyscy[i].nazwisko, wszyscy[i].imie, wszyscy[i].data_urodzenia);
         }
     } else {
         system("cls");
