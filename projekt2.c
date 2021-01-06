@@ -55,8 +55,6 @@ void pobierz_dane() {
         printf("Podaj nazwisko: ");
         gets(nazwisko);
         if (strlen(nazwisko) == 0) {
-            //jesli endl to koncz
-            printf("\n--\nPusty wiersz\n--\n");
             break;
         }
         printf("\nPodaj imie: ");
@@ -65,14 +63,7 @@ void pobierz_dane() {
         gets(data_urodzenia);
         if (czy_wprowadzone_dane_ok(data_urodzenia) == false) {
             printf("\nNie podano prawidlowej daty. Nie dodaje postaci do struktury.\n");
-            if ( data_urodzenia[6] - '0' > 2) {
-                printf("Bledny miesiac\n");
-            }
-            if (data_urodzenia[8] - '0' >= 3  && data_urodzenia[9] >= 2) {
-                printf("Bledny dzien\n");
-            }
         } else {
-            printf("wprowadzone ok\n");
 
             ptr = strtok(data_urodzenia, sep);
             memset(data, 0, sizeof(data));
@@ -80,8 +71,6 @@ void pobierz_dane() {
                 strcat(data, ptr);
                 ptr = strtok(NULL, sep);
             }
-            printf("data %s", data);
-            printf("dat at %i\n", atoi(data));
             if (sprawdz_czy_urodzony(atoi(data)) == true) {
                 printf("Dodaje %s %s %s..\n", nazwisko, imie, data_urodzenia);
                 strcpy(wszyscy[ile].nazwisko, nazwisko);
